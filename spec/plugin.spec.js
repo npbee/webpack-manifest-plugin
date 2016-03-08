@@ -177,4 +177,17 @@ describe('ManifestPlugin', function() {
 
     });
   });
+
+  describe('with unnamed chunks', function() {
+    it('works when using require.ensure', function(done) {
+      webpackCompile({
+        entry: path.join(__dirname, './fixtures/file-with-code-split.js')
+      }, function(manifest){
+        expect(manifest).toBeDefined();
+        expect(manifest['main.js']).toBeDefined();
+        expect(manifest['main.js']).toEqual('main.js');
+        done();
+      });
+    });
+  });
 });
